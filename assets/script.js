@@ -61,10 +61,17 @@ const dialogTitle = document.querySelector("#dialog-title");
 const dialogDescription = document.querySelector("#dialog-description");
 const dialogTags = document.querySelector("#dialog-tags");
 const dialogLink = document.querySelector("#dialog-link");
+const dialogImage = document.querySelector("#dialog-image");
+const dialogFile = document.querySelector("#dialog-file");
+let projectTrigger = null;
 
 document.querySelectorAll(".project-open").forEach((button) => {
   button.addEventListener("click", () => {
     const project = projects[button.dataset.project];
+    projectTrigger = button;
+    dialogImage.src = button.querySelector('.project-media img').getAttribute('src');
+    dialogImage.alt = 'Concept illustration for ' + project.title;
+    dialogFile.textContent = 'PROJECT FILE / ' + button.querySelector('.project-number').textContent;
     dialogType.textContent = project.type;
     dialogTitle.textContent = project.title;
     dialogDescription.textContent = project.description;
@@ -75,11 +82,17 @@ document.querySelectorAll(".project-open").forEach((button) => {
     }));
     dialogLink.href = project.link;
     dialog.showModal();
+    document.body.classList.add('project-modal-open');
   });
 });
 
 document.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
+dialog.addEventListener('close', () => {
+  document.body.classList.remove('project-modal-open');
+  projectTrigger?.focus({preventScroll:true});
+});
 dialog.addEventListener("click", (event) => {
-  if (event.target === dialog) dialog.close();
+  const bounds = dialog.getBoundingClientRect();
+  if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) dialog.close();
 });
 document.querySelector("#year").textContent = new Date().getFullYear();

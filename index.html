@@ -4,15 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Ali Sakhaei — mechanical engineering student interested in robotics, control, simulation, embedded systems, and mechanical design." />
-    <meta name="theme-color" content="#071017" />
+    <meta name="theme-color" content="#151616" />
     <title>Ali Sakhaei | Engineering Portfolio</title>
-    <link rel="stylesheet" href="assets/styles.css" />
+    <script>try{const t=localStorage.getItem('portfolio-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark';}catch{document.documentElement.dataset.theme='dark';}</script>
+    <link rel="stylesheet" href="assets/redesign.css" />
+    <link rel="stylesheet" href="assets/enhancements.css" />
     <script src="assets/script.js" defer></script>
-    <script src="assets/robot.js" defer></script>
+    <script src="assets/enhancements.js" defer></script>
+    <script src="assets/spider.js" defer></script>
   </head>
   <body>
+    <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
     <canvas id="robot-canvas" aria-hidden="true"></canvas>
-    <button class="robot-motion" type="button" aria-pressed="false" aria-label="Pause background animation">Pause animation</button>
+    <button class="robot-motion" type="button" aria-pressed="false" aria-label="Pause spider robot"><span class="motion-icon" aria-hidden="true">Ⅱ</span><span class="motion-label">Pause spider</span></button>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header" id="top">
@@ -30,13 +34,14 @@
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span class="theme-icon" aria-hidden="true">◐</span><span class="theme-label">Light</span></button>
     </header>
 
     <main id="main">
       <section class="hero" id="home" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow">Mechanical Engineering · Robotics</p>
-          <h1 id="hero-title">Ali<br /><span>Sakhaei</span></h1>
+          <h1 id="hero-title">Ali<span>Sakhaei<span class="name-period" aria-hidden="true">.</span></span></h1>
           <p class="hero-lead">
             I work across mechanical design, control, simulation, and embedded systems, with a growing focus on designing and building robotic systems.
           </p>
@@ -48,12 +53,10 @@
 
         <div class="hero-visual" aria-label="Portrait of Ali Sakhaei">
           <div class="portrait-frame"><img src="https://github.com/alisakhaei.png" alt="Ali Sakhaei" /></div>
-          <div class="orbit orbit-one"></div>
-          <div class="orbit orbit-two"></div>
           <p class="visual-note"><span>Current direction</span> robotic systems that connect mechanics, sensing, and control</p>
         </div>
 
-        <a class="scroll-cue" href="#about" aria-label="Scroll to About section">Scroll <span>↓</span></a>
+        <div class="hero-bottom"><a class="scroll-cue" href="#about" aria-label="Scroll to About section">Scroll to explore <span>↓</span></a><span class="spider-hint">Move your cursor. The spider follows.</span></div>
       </section>
 
       <section class="section about" id="about" aria-labelledby="about-title">
@@ -163,13 +166,19 @@
 
     <footer><span>Ali Sakhaei</span><span>Engineering portfolio · <span id="year"></span></span><a href="#top">Back to top ↑</a></footer>
 
-    <dialog class="project-dialog" id="project-dialog">
+    <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
       <button class="dialog-close" type="button" aria-label="Close project details">×</button>
-      <p class="dialog-type" id="dialog-type"></p>
-      <h2 id="dialog-title"></h2>
-      <p id="dialog-description"></p>
-      <div class="dialog-tags" id="dialog-tags"></div>
-      <a class="button button-primary" id="dialog-link" href="#" target="_blank" rel="noreferrer">View repository ↗</a>
+      <div class="dialog-layout">
+        <div class="dialog-visual"><span class="dialog-file" id="dialog-file"></span><img id="dialog-image" alt="" /><span class="dialog-caption">Engineering portfolio / Ali Sakhaei</span></div>
+        <div class="dialog-content">
+          <p class="dialog-type" id="dialog-type"></p>
+          <h2 id="dialog-title"></h2>
+          <p id="dialog-description"></p>
+          <p class="dialog-tools-label">Tools & methods</p>
+          <div class="dialog-tags" id="dialog-tags"></div>
+          <a class="button button-primary" id="dialog-link" href="#" target="_blank" rel="noreferrer">View repository ↗</a>
+        </div>
+      </div>
     </dialog>
   </body>
 </html>
