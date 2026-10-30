@@ -1,184 +1,395 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ali Sakhaei — mechanical engineering student interested in robotics, control, simulation, embedded systems, and mechanical design." />
-    <meta name="theme-color" content="#151616" />
-    <title>Ali Sakhaei | Engineering Portfolio</title>
-    <script>try{const t=localStorage.getItem('portfolio-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark';}catch{document.documentElement.dataset.theme='dark';}</script>
-    <link rel="stylesheet" href="assets/redesign.css" />
-    <link rel="stylesheet" href="assets/enhancements.css" />
-    <script src="assets/script.js" defer></script>
-    <script src="assets/enhancements.js" defer></script>
-    <script src="assets/spider.js" defer></script>
-  </head>
-  <body>
-    <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
-    <canvas id="robot-canvas" aria-hidden="true"></canvas>
-    <button class="robot-motion" type="button" aria-pressed="false" aria-label="Pause spider robot"><span class="motion-icon" aria-hidden="true">Ⅱ</span><span class="motion-label">Pause spider</span></button>
-    <a class="skip-link" href="#main">Skip to content</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ali Sakhaei — Engineering in Motion</title>
+  <meta name="description" content="Ali Sakhaei — Mechanical Engineering student building toward robotic systems: mechanical design, dynamics, control, simulation and embedded systems.">
+  <meta name="theme-color" content="#09090a">
+  <meta property="og:title" content="Ali Sakhaei — Engineering in Motion">
+  <meta property="og:description" content="Mechanical design, dynamics, control and simulation — on the way to robotic systems.">
+  <meta property="og:image" content="assets/img/portrait.webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2309090a'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23fff' stroke-width='5' stroke-dasharray='6 4.6'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%2363e2cf'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=6">
+</head>
+<body class="is-loading">
 
-    <header class="site-header" id="top">
-      <a class="brand" href="#home" aria-label="Ali Sakhaei, home">
-        <span class="brand-mark">AS</span>
-        <span>Ali Sakhaei</span>
+  <!-- ============ LOADER ============ -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader-stage">
+      <svg class="loader-gear" viewBox="0 0 500 500">
+        <path class="gear-path" d=""/>
+        <circle class="gear-head" r="4.5" cx="-20" cy="-20"/>
+      </svg>
+      <div class="loader-word">SAKHAEI<span>.</span></div>
+    </div>
+    <div class="loader-foot mono">
+      <span>Engineering in motion</span>
+      <span class="loader-count">000</span>
+    </div>
+  </div>
+
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"><span class="cursor-label">Drag</span></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" data-theme="light">
+    <a href="#home" class="logo" aria-label="Ali Sakhaei, back to top">SAKHAEI<i></i></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home" data-roll>Home</a>
+      <a href="#about" data-roll>About</a>
+      <a href="#process" data-roll>Process</a>
+      <a href="#work" data-roll>Work</a>
+      <a href="#toolkit" data-roll>Toolkit</a>
+      <a href="#focus" data-roll>Focus</a>
+      <span class="nav-pill" aria-hidden="true"></span>
+    </nav>
+    <div class="nav-social">
+      <a href="https://github.com/alisakhaei" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a10.9 10.9 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
       </a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span>
-        <span class="sr-only">Open navigation</span>
-      </button>
-      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#focus">Focus</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span class="theme-icon" aria-hidden="true">◐</span><span class="theme-label">Light</span></button>
-    </header>
+      <a href="https://www.linkedin.com/in/a-sakhaei" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-3.95v-11Z"/></svg>
+      </a>
+      <a href="mailto:ali.skhei20@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>
+      </a>
+    </div>
+    <button class="menu-btn" aria-expanded="false" aria-controls="mobileMenu"><span data-roll>Menu</span></button>
+  </header>
 
-    <main id="main">
-      <section class="hero" id="home" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">Mechanical Engineering · Robotics</p>
-          <h1 id="hero-title">Ali<span>Sakhaei<span class="name-period" aria-hidden="true">.</span></span></h1>
-          <p class="hero-lead">
-            I work across mechanical design, control, simulation, and embedded systems, with a growing focus on designing and building robotic systems.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#projects">View projects</a>
-            <a class="button button-secondary" href="https://github.com/alisakhaei" target="_blank" rel="noreferrer">GitHub profile</a>
-          </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <nav aria-label="Mobile">
+      <a href="#home" class="mm-link">Home</a>
+      <a href="#about" class="mm-link">About</a>
+      <a href="#process" class="mm-link">Process</a>
+      <a href="#work" class="mm-link">Work</a>
+      <a href="#toolkit" class="mm-link">Toolkit</a>
+      <a href="#focus" class="mm-link">Focus</a>
+      <a href="#contact" class="mm-link">Contact</a>
+    </nav>
+    <div class="mm-foot mono">
+      <a href="https://github.com/alisakhaei" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/a-sakhaei" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="mailto:ali.skhei20@gmail.com">Email ↗</a>
+    </div>
+  </div>
+
+  <main class="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home" data-theme="light">
+      <div class="hero-inner">
+        <h1 class="hero-title" aria-label="Engineering in motion">
+          <span class="ht-line"><span class="ht-text">Engineering</span></span>
+          <span class="ht-line ht-line--fade"><span class="ht-text">In Motion</span></span>
+        </h1>
+        <figure class="hero-portrait">
+          <img src="assets/img/portrait.webp" alt="Portrait of Ali Sakhaei" width="1254" height="1254" fetchpriority="high">
+        </figure>
+        <div class="hero-left">
+          <span class="mono">Mechanical engineering<br>· Robotics</span>
+          <a href="#about" class="hero-arrow" aria-label="Scroll to about">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 8v10H8"/></svg>
+          </a>
+        </div>
+        <div class="hero-right">
+          <p class="mono">I turn ideas into working systems — where mechanics, sensing &amp; control meet.</p>
+          <ul class="mono">
+            <li>Robotic systems</li>
+            <li>Control &amp; simulation</li>
+            <li>Mechanical design</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about" data-theme="dark">
+      <canvas class="flow" aria-hidden="true"></canvas>
+      <div class="about-vignette" aria-hidden="true"></div>
+
+      <div class="about-card">
+        <div class="about-scene" aria-hidden="true">
+          <div class="beam"></div>
+          <div class="beam beam--soft"></div>
+          <div class="dust-field"></div>
+          <div class="floor-glow"></div>
+          <svg class="arm" viewBox="-230 -60 460 340">
+            <g transform="translate(0 262)">
+              <path class="arm-floor" d="M-110 6 H110"/>
+              <path class="arm-part" d="M-48 6 L-34 -18 H34 L48 6 Z"/>
+              <g transform="translate(0 -18)">
+                <circle class="arm-orbit" r="42"/>
+                <g class="arm-l1">
+                  <rect class="arm-part" x="-11" y="-11" width="162" height="22" rx="11"/>
+                  <path class="arm-line" d="M14 0 H126"/>
+                  <g transform="translate(150 0)">
+                    <g class="arm-l2">
+                      <rect class="arm-part" x="-8" y="-8" width="124" height="16" rx="8"/>
+                      <g transform="translate(114 0)">
+                        <g class="arm-l3">
+                          <rect class="arm-part" x="-4" y="-8" width="24" height="16" rx="3"/>
+                          <g class="arm-claw-a"><path class="arm-part arm-claw" d="M20 -5 L34 -13 L46 -7"/></g>
+                          <g class="arm-claw-b"><path class="arm-part arm-claw" d="M20 5 L34 13 L46 7"/></g>
+                        </g>
+                        <circle class="arm-part" r="9"/><circle class="arm-dot" r="2.5"/>
+                      </g>
+                    </g>
+                    <circle class="arm-part" r="13"/><circle class="arm-dot" r="3.5"/>
+                  </g>
+                </g>
+                <circle class="arm-part" r="17"/><circle class="arm-dot" r="4"/>
+              </g>
+            </g>
+          </svg>
         </div>
 
-        <div class="hero-visual" aria-label="Portrait of Ali Sakhaei">
-          <div class="portrait-frame"><img src="https://github.com/alisakhaei.png" alt="Ali Sakhaei" /></div>
-          <p class="visual-note"><span>Current direction</span> robotic systems that connect mechanics, sensing, and control</p>
-        </div>
-
-        <div class="hero-bottom"><a class="scroll-cue" href="#about" aria-label="Scroll to About section">Scroll to explore <span>↓</span></a><span class="spider-hint">Move your cursor. The spider follows.</span></div>
-      </section>
-
-      <section class="section about" id="about" aria-labelledby="about-title">
-        <div class="section-label"><span>01</span> About</div>
-        <div class="about-grid">
-          <div>
-            <h2 id="about-title">Engineering ideas from model to mechanism.</h2>
+        <div class="about-content">
+          <div class="ac-top">
+            <h2 class="ac-headline ac-reveal">Turning ideas into working systems — from model to mechanism.</h2>
+            <span class="mono ac-meta ac-reveal">B.Sc. Mechanical Engineering<br>Persian · English · German</span>
           </div>
-          <div class="about-copy">
-            <p>
-              I am a Mechanical Engineering student interested in robotics and the process of turning an idea into a working system. My academic work has included mechanical design, dynamic modeling, control, CFD, and physics-informed neural networks.
-            </p>
-            <p>
-              I am especially interested in projects where CAD and mechanism design meet simulation, electronics, and embedded implementation. I am still exploring the exact robotics field I want to specialize in.
-            </p>
-            <div class="facts">
-              <div><span>Education</span><strong>B.Sc. Mechanical Engineering</strong></div>
-              <div><span>Languages</span><strong>Persian - English - German</strong></div>
+          <div class="ac-bottom">
+            <div class="ac-text">
+              <span class="mono ac-label ac-reveal">Discipline &amp; craft <em>— Design · Dynamics · Control · Embedded</em></span>
+              <p class="ac-reveal">I'm a Mechanical Engineering student drawn to robotics and to the process of turning an idea into a working system. My academic work spans mechanical design, dynamic modeling, control, CFD and physics-informed neural networks — and I'm most at home where CAD and mechanism design meet simulation, electronics and embedded implementation.</p>
+            </div>
+            <div class="ac-actions ac-reveal">
+              <a href="#contact" class="btn btn--light"><span data-roll>Get in touch</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a href="#work" class="btn btn--ghost"><span data-roll>Projects</span></a>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section focus" id="focus" aria-labelledby="focus-title">
-        <div class="section-label"><span>02</span> Focus areas</div>
-        <div class="section-heading">
-          <h2 id="focus-title">What I am learning and building around</h2>
-          <p>A broad robotics direction supported by mechanical engineering fundamentals.</p>
+      <div class="about-words" aria-hidden="true">
+        <span class="aw aw-l">About</span>
+        <span class="aw aw-r">Me</span>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS (horizontal) ============ -->
+    <section class="process" id="process" data-theme="dark">
+      <div class="process-top">
+        <span class="mono">02 — Process &amp; practice</span>
+        <div class="process-bar" aria-hidden="true"><i></i></div>
+      </div>
+
+      <div class="process-stage">
+      <div class="process-ghost process-ghost--a" aria-hidden="true">Design · Model · Simulate · Control · Build ·</div>
+      <div class="process-ghost process-ghost--b" aria-hidden="true">Stage 01 — Stage 05 · From model to mechanism</div>
+
+      <div class="process-track">
+        <div class="pt-panel pt-intro">
+          <span class="mono pt-eyebrow">From model to mechanism</span>
+          <h2 class="extrude"><span>From idea</span><span>to motion</span></h2>
+          <p class="pt-lead">The stages I move through to turn an idea into a working system — and the projects where each one happened.</p>
         </div>
-        <div class="focus-grid">
-          <article><span>01</span><h3>Robotic Systems</h3><p>Mechanisms and integrated systems designed to sense, move, and perform useful tasks.</p></article>
-          <article><span>02</span><h3>Control & Simulation</h3><p>Dynamic modeling, controller design, and simulation of mechanical and electromechanical systems.</p></article>
-          <article><span>03</span><h3>Embedded & Electronics</h3><p>Coursework and practical experience with electronics, sensors, and embedded implementation.</p></article>
-          <article><span>04</span><h3>Mechanical Design</h3><p>CAD, machine elements, assemblies, engineering drawings, and design calculations.</p></article>
-          <article><span>05</span><h3>Computational Engineering</h3><p>CFD, numerical analysis, and machine-learning methods applied to engineering problems.</p></article>
+
+        <article class="pt-panel chapter">
+          <div class="ch-meta mono"><span>Stage 01</span><i></i><span>Design</span></div>
+          <h3 class="ch-title"><span>Mechanical</span><span>Design</span></h3>
+          <p class="ch-desc">CAD, machine elements, assemblies, engineering drawings — and the calculations that justify every dimension.</p>
+          <ul class="ch-miles">
+            <li><em class="mono">Milestone 01</em>Forklift crane attachment — stability, bolts, pins &amp; welds</li>
+            <li><em class="mono">Milestone 02</em>Two-stage gearbox — gears, shafts, bearings &amp; housing</li>
+            <li><em class="mono">Milestone 03</em>Complete SolidWorks assemblies &amp; manufacturing drawings</li>
+          </ul>
+        </article>
+
+        <article class="pt-panel chapter">
+          <div class="ch-meta mono"><span>Stage 02</span><i></i><span>Model</span></div>
+          <h3 class="ch-title"><span>Dynamic</span><span>Modeling</span></h3>
+          <p class="ch-desc">Describing how mechanisms actually move: multibody models, physics-based motor models and the equations behind them.</p>
+          <ul class="ch-miles">
+            <li><em class="mono">Milestone 01</em>Reciprocating pump modeled in Simscape Multibody</li>
+            <li><em class="mono">Milestone 02</em>Operation compared at 100 and 300 rpm</li>
+            <li><em class="mono">Milestone 03</em>How a flywheel reshapes torque &amp; system response</li>
+          </ul>
+        </article>
+
+        <article class="pt-panel chapter">
+          <div class="ch-meta mono"><span>Stage 03</span><i></i><span>Simulate</span></div>
+          <h3 class="ch-title"><span>Computational</span><span>Flow</span></h3>
+          <p class="ch-desc">CFD, numerical analysis and machine-learning methods applied to real engineering flows.</p>
+          <ul class="ch-miles">
+            <li><em class="mono">Milestone 01</em>Airfoil flow with physics-informed neural networks</li>
+            <li><em class="mono">Milestone 02</em>Fluent studies — diffuser, pipe elbow, compressible nozzle</li>
+            <li><em class="mono">Milestone 03</em>MATLAB post-processing &amp; flow-field visualisation</li>
+          </ul>
+        </article>
+
+        <article class="pt-panel chapter">
+          <div class="ch-meta mono"><span>Stage 04</span><i></i><span>Control</span></div>
+          <h3 class="ch-title"><span>Control</span><span>Systems</span></h3>
+          <p class="ch-desc">Closing the loop — designing controllers that make a physical system do what it is told.</p>
+          <ul class="ch-miles">
+            <li><em class="mono">Milestone 01</em>Separately excited DC motor, modeled from physics</li>
+            <li><em class="mono">Milestone 02</em>Open-loop vs closed-loop speed regulation</li>
+            <li><em class="mono">Milestone 03</em>PI controller with armature-voltage saturation</li>
+          </ul>
+        </article>
+
+        <article class="pt-panel chapter">
+          <div class="ch-meta mono"><span>Stage 05</span><i></i><span>Build — now</span></div>
+          <h3 class="ch-title"><span>Robotic</span><span>Systems</span></h3>
+          <p class="ch-desc">Where it all converges: mechanisms that sense, move and perform useful tasks. This is the direction I'm heading.</p>
+          <ul class="ch-miles">
+            <li><em class="mono">Focus 01</em>Electronics, sensors &amp; embedded implementation</li>
+            <li><em class="mono">Focus 02</em>Connecting CAD with simulation and control</li>
+            <li><em class="mono">Focus 03</em>Exploring which robotics field to specialise in</li>
+          </ul>
+        </article>
+      </div>
+      </div>
+
+      <div class="process-tabs" role="tablist" aria-label="Process stages">
+        <button class="mono" data-i="0">Design</button>
+        <button class="mono" data-i="1">Model</button>
+        <button class="mono" data-i="2">Simulate</button>
+        <button class="mono" data-i="3">Control</button>
+        <button class="mono" data-i="4">Build</button>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK (WebGL ribbon) ============ -->
+    <section class="work" id="work" data-theme="light">
+      <div class="work-inner">
+        <div class="work-head">
+          <span class="mono">03 — Selected work</span>
+          <span class="mono work-hint">Scroll or drag ⟷</span>
         </div>
-        <div class="tool-row" aria-label="Tools and technologies">
-          <span>MATLAB</span><span>Simulink</span><span>Simscape</span><span>Python</span><span>PyTorch</span><span>SolidWorks</span><span>ANSYS Fluent</span><span>Arduino</span><span>LaTeX</span>
+        <canvas class="ribbon" data-cursor="drag" aria-label="Project carousel"></canvas>
+        <div class="work-caption">
+          <div class="wc-title"><span>Airfoil Flow with PINNs</span></div>
+          <div class="wc-sub">Computational methods</div>
+          <div class="wc-row">
+            <span class="mono wc-count"><b>01</b> / 06</span>
+            <button class="wc-open mono"><span data-roll>View details</span> ↗</button>
+          </div>
         </div>
-      </section>
+        <h2 class="work-title">Selected work</h2>
+        <div class="work-fallback"></div>
+      </div>
+    </section>
 
-      <section class="section projects" id="projects" aria-labelledby="projects-title">
-        <div class="section-label"><span>03</span> Selected work</div>
-        <div class="section-heading projects-heading">
-          <h2 id="projects-title">Projects</h2>
-          <p>Academic work across design, dynamics, control, and computational engineering.</p>
-        </div>
-
-        <div class="project-grid">
-          <article class="project-card">
-            <button class="project-open" type="button" data-project="pinn" aria-label="Open Airfoil Flow PINN project details">
-              <div class="project-media"><img src="assets/poster-pinn.png" alt="" loading="lazy" decoding="async" /></div>
-              <div class="project-body"><span class="project-number">01</span><p class="project-type">Computational Methods</p><h3>Airfoil Flow with PINNs</h3><p>Potential-flow analysis and physics-informed neural networks for two-dimensional airfoil flow.</p><div class="tags"><span>Python</span><span>PyTorch</span><span>PINN</span></div><span class="details-link">View details ↗</span></div>
-            </button>
-          </article>
-
-          <article class="project-card">
-            <button class="project-open" type="button" data-project="pump" aria-label="Open Reciprocating Pump Dynamics project details">
-              <div class="project-media"><img src="assets/poster-pump.png" alt="" loading="lazy" decoding="async" /></div>
-              <div class="project-body"><span class="project-number">02</span><p class="project-type">Multibody Dynamics</p><h3>Reciprocating Pump Dynamics</h3><p>Multibody simulation of a pump mechanism, including operating-speed comparison and flywheel effects.</p><div class="tags"><span>Simscape</span><span>Dynamics</span><span>Simulation</span></div><span class="details-link">View details ↗</span></div>
-            </button>
-          </article>
-
-          <article class="project-card">
-            <button class="project-open" type="button" data-project="motor" aria-label="Open DC Motor Speed Control project details">
-              <div class="project-media"><img src="assets/poster-motor.png" alt="" loading="lazy" decoding="async" /></div>
-              <div class="project-body"><span class="project-number">03</span><p class="project-type">Control & Simulation</p><h3>DC Motor Speed Control</h3><p>Physics-based motor model, open-loop analysis, and PI speed control in MATLAB/Simulink.</p><div class="tags"><span>MATLAB</span><span>Simulink</span><span>PI Control</span></div><span class="details-link">View details ↗</span></div>
-            </button>
-          </article>
-
-          <article class="project-card">
-            <button class="project-open" type="button" data-project="forklift" aria-label="Open Forklift Crane Attachment project details">
-              <div class="project-media"><img src="assets/poster-forklift.png" alt="" loading="lazy" decoding="async" /></div>
-              <div class="project-body"><span class="project-number">04</span><p class="project-type">Mechanical Design</p><h3>Forklift Crane Attachment</h3><p>Adjustable crane attachment with structural calculations, joint design, drawings, and a complete SolidWorks assembly.</p><div class="tags"><span>SolidWorks</span><span>Machine Design</span><span>Structural Analysis</span></div><span class="details-link">View details ↗</span></div>
-            </button>
-          </article>
-
-          <article class="project-card">
-            <button class="project-open" type="button" data-project="gearbox" aria-label="Open Gearbox Design project details">
-              <div class="project-media"><img src="assets/poster-gearbox.png" alt="" loading="lazy" decoding="async" /></div>
-              <div class="project-body"><span class="project-number">05</span><p class="project-type">Machine Design</p><h3>Two-Stage Gearbox</h3><p>Mechanical design and analysis of gears, shafts, bearings, housing, and the complete assembly.</p><div class="tags"><span>SolidWorks</span><span>Gears</span><span>Machine Elements</span></div><span class="details-link">View details ↗</span></div>
-            </button>
-          </article>
-
-          <article class="project-card">
-            <button class="project-open" type="button" data-project="fluent" aria-label="Open ANSYS Fluent Flow Analysis project details">
-              <div class="project-media"><img src="assets/poster-fluent.png" alt="" loading="lazy" decoding="async" /></div>
-              <div class="project-body"><span class="project-number">06</span><p class="project-type">CFD</p><h3>ANSYS Fluent Flow Analysis</h3><p>Numerical flow studies of a diffuser, pipe elbow, and compressible nozzle with post-processing in MATLAB.</p><div class="tags"><span>ANSYS Fluent</span><span>MATLAB</span><span>CFD</span></div><span class="details-link">View details ↗</span></div>
-            </button>
-          </article>
-        </div>
-      </section>
-
-      <section class="section contact" id="contact" aria-labelledby="contact-title">
-        <div class="contact-copy">
-          <div class="section-label"><span>04</span> Contact</div>
-          <h2 id="contact-title">Interested in engineering and robotics projects.</h2>
-          <p>For project, research, and collaboration inquiries, connect with me by email, LinkedIn, or GitHub.</p>
-        </div>
-        <div class="contact-links">
-          <a href="mailto:ali.skhei20@gmail.com"><span>Email</span><strong>ali.skhei20@gmail.com</strong><b>↗</b></a>
-          <a href="https://www.linkedin.com/in/a-sakhaei" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>linkedin.com/in/a-sakhaei</strong><b>↗</b></a>
-          <a href="https://github.com/alisakhaei" target="_blank" rel="noreferrer"><span>GitHub</span><strong>github.com/alisakhaei</strong><b>↗</b></a>
-        </div>
-      </section>
-    </main>
-
-    <footer><span>Ali Sakhaei</span><span>Engineering portfolio · <span id="year"></span></span><a href="#top">Back to top ↑</a></footer>
-
-    <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
-      <button class="dialog-close" type="button" aria-label="Close project details">×</button>
-      <div class="dialog-layout">
-        <div class="dialog-visual"><span class="dialog-file" id="dialog-file"></span><img id="dialog-image" alt="" /><span class="dialog-caption">Engineering portfolio / Ali Sakhaei</span></div>
-        <div class="dialog-content">
-          <p class="dialog-type" id="dialog-type"></p>
-          <h2 id="dialog-title"></h2>
-          <p id="dialog-description"></p>
-          <p class="dialog-tools-label">Tools & methods</p>
-          <div class="dialog-tags" id="dialog-tags"></div>
-          <a class="button button-primary" id="dialog-link" href="#" target="_blank" rel="noreferrer">View repository ↗</a>
+    <!-- ============ TOOLKIT (3D drum) ============ -->
+    <section class="kit" id="toolkit" data-theme="light">
+      <div class="kit-head">
+        <span class="mono">04 — Toolkit</span>
+      </div>
+      <div class="kit-stage" data-cursor="drag">
+        <div class="kit-scale">
+          <div class="kit-ring"></div>
+          <div class="kit-center">Toolkit ’26</div>
         </div>
       </div>
-    </dialog>
-  </body>
+      <div class="kit-label" aria-live="polite"><span class="kl-name">MATLAB</span><small class="mono kl-cat">Numerical computing</small></div>
+      <ol class="kit-index mono"></ol>
+      <div class="kit-hint mono">↕ Scroll or drag the drum to cycle</div>
+    </section>
+
+    <!-- ============ FOCUS (accordion) ============ -->
+    <section class="focus" id="focus" data-theme="light">
+      <div class="focus-head">
+        <span class="mono">05 — Areas of focus</span>
+        <h2 class="reveal-words">What I am learning and building around</h2>
+        <p class="mono">A broad robotics direction, supported by mechanical engineering fundamentals.</p>
+      </div>
+      <div class="acc">
+        <div class="acc-item is-open">
+          <button class="acc-head" aria-expanded="true"><span class="acc-num mono">1</span><span class="acc-title">Robotic systems</span><span class="acc-chev" aria-hidden="true"></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>Mechanisms and integrated systems designed to sense, move and perform useful tasks — the point where everything below comes together.</p>
+            <div class="acc-foot mono"><span>Stack: mechanisms · sensing · actuation · integration</span><a href="#contact" data-goto="contact"><span data-roll>Let's talk</span> ↗</a></div>
+          </div></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num mono">2</span><span class="acc-title">Control &amp; simulation</span><span class="acc-chev" aria-hidden="true"></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>Dynamic modeling, controller design and simulation of mechanical and electromechanical systems.</p>
+            <div class="acc-foot mono"><span>Stack: MATLAB · Simulink · Simscape</span><a href="#work" data-project="motor"><span data-roll>See work</span> ↗</a></div>
+          </div></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num mono">3</span><span class="acc-title">Embedded &amp; electronics</span><span class="acc-chev" aria-hidden="true"></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>Coursework and practical experience with electronics, sensors and embedded implementation.</p>
+            <div class="acc-foot mono"><span>Stack: Arduino · sensors · electronics</span><a href="#toolkit" data-tool="Arduino"><span data-roll>See toolkit</span> ↗</a></div>
+          </div></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num mono">4</span><span class="acc-title">Mechanical design</span><span class="acc-chev" aria-hidden="true"></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>CAD, machine elements, assemblies, engineering drawings and design calculations.</p>
+            <div class="acc-foot mono"><span>Stack: SolidWorks · machine elements · drawings</span><a href="#work" data-project="gearbox"><span data-roll>See work</span> ↗</a></div>
+          </div></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num mono">5</span><span class="acc-title">Computational engineering</span><span class="acc-chev" aria-hidden="true"></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>CFD, numerical analysis and machine-learning methods applied to engineering problems.</p>
+            <div class="acc-foot mono"><span>Stack: ANSYS Fluent · Python · PyTorch</span><a href="#work" data-project="pinn"><span data-roll>See work</span> ↗</a></div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ CONTACT ============ -->
+  <footer class="contact" id="contact" data-theme="dark">
+    <div class="contact-inner">
+      <span class="mono contact-eyebrow">06 — Contact</span>
+      <h2 class="talk" aria-label="Let's talk">
+        <span class="talk-depth" aria-hidden="true">Let's talk</span>
+        <span class="talk-face" aria-hidden="true">Let's talk</span>
+      </h2>
+      <p class="contact-lead">Interested in engineering and robotics projects. For project, research and collaboration inquiries — reach out.</p>
+      <div class="pills">
+        <a class="pill" href="https://www.linkedin.com/in/a-sakhaei" target="_blank" rel="noopener"><span data-roll>LinkedIn</span></a>
+        <a class="pill" href="https://github.com/alisakhaei" target="_blank" rel="noopener"><span data-roll>GitHub</span></a>
+        <button class="pill" type="button" data-copy="ali.skhei20@gmail.com"><span data-roll>Copy email</span></button>
+        <a class="pill pill--solid" href="mailto:ali.skhei20@gmail.com"><span data-roll>Contact me</span></a>
+      </div>
+    </div>
+    <div class="contact-foot mono">
+      <span>© <span class="year">2026</span> Ali Sakhaei — All rights reserved</span>
+      <a href="#home" class="to-top"><span data-roll>Back to top</span> ↑</a>
+      <span>ali.skhei20@gmail.com</span>
+    </div>
+  </footer>
+
+  <!-- ============ PROJECT MODAL ============ -->
+  <dialog class="modal" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <div class="modal-media"><img alt=""></div>
+      <div class="modal-body">
+        <span class="mono modal-file"></span>
+        <h3 id="modalTitle" class="modal-title"></h3>
+        <p class="modal-desc"></p>
+        <div class="modal-tags"></div>
+        <div class="modal-actions">
+          <a class="btn btn--light modal-link" target="_blank" rel="noopener"><span data-roll>View repository</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <button class="btn btn--ghost modal-close" type="button"><span data-roll>Close</span></button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast mono" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/project-art.js?v=6"></script>
+  <script src="js/main.js?v=6"></script>
+</body>
 </html>
